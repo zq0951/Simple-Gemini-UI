@@ -1,0 +1,413 @@
+* {
+    margin: 0;
+}
+:root {
+    --size: calc(1vw + 1vh);
+    --bg: #fff;
+    --color: #0c0c0c;
+    --border-color: #999;
+    --check-color: #0080ff;
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.mainBody {
+    border: 1px solid var(--border-color);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    box-sizing: border-box;
+    width: 60%;
+    height: 90%;
+    background: var(--bg);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.other {
+    width: 320px;
+    padding-bottom: 230px;
+}
+.vLine {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 400px;
+    background: var(--border-color);
+    margin: 0 8px;
+}
+#content {
+    position: relative;
+    flex: 1;
+    border-radius: 8px;
+    overflow: auto;
+    padding: 16px 16px 20px;
+    background: #f5f5f5;
+}
+.settingModel {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+}
+.modelBody {
+    position: relative;
+    background: #fff;
+    width: 40vw;
+    height: 50vh;
+    border-radius: 12px;
+    padding: 16px 0 64px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.safeSettingBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.safeSetting {
+    min-height: 400px;
+}
+.apiKeyBody,
+.openApiKeyBody,
+.hostBody,
+.openaihostBody {
+    border-bottom: 1px solid var(--border-color);
+    height: 36px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 16px;
+    padding-right: 16px;
+}
+.safeSettingTitle,
+.chooseSafeView {
+    margin-left: 16px;
+    padding-right: 16px;
+    height: 36px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+input,
+select {
+    background: var(--bg);
+    color: var(--color);
+}
+input[type="checkbox"] {
+    accent-color: var(--check-color);
+    margin-right: 4px;
+}
+input[type="range"] {
+    position: relative;
+    appearance: none;
+    background-color: var(--check-color);
+    height: 4px;
+    margin: 6px 40px 6px 0;
+    border-radius: 999px;
+}
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 99px;
+    background: #f5f5f5;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+input[type="range"]::after {
+    content: attr(value);
+    position: absolute;
+    font-size: 16px;
+    right: -2em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+input[type="text"],
+#chooseModel,
+#inputText,
+.thresholdSelect {
+    width: 300px;
+    border: 1px solid var(--border-color);
+    outline: none;
+    border-radius: 8px;
+    padding: 2px 4px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    line-height: 1;
+}
+#chooseModel {
+    width: 180px;
+}
+.modelSelectBody {
+    justify-content: space-between;
+}
+.thresholdSelect {
+    display: none;
+    margin-left: 34px;
+}
+.clickText {
+    cursor: pointer;
+    user-select: none;
+}
+.closeModel {
+    bottom: 16px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn,
+#send,
+#soundInput {
+    border: 1px solid var(--border-color);
+    outline: none;
+    border-radius: 8px;
+    padding: 2px 4px;
+    width: 100px;
+    box-sizing: border-box;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1;
+}
+.modelSelectBody,
+.longChatBody,
+.steamBody,
+.useCamerabody {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 36px;
+    border-bottom: 1px solid var(--border-color);
+}
+.option {
+    display: flex;
+    flex-direction: column;
+}
+#choosePic {
+    margin-left: 8px;
+}
+#preImage {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+}
+.showImage {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.preImageItem {
+    cursor: pointer;
+    border-radius: 4px;
+    height: 48px;
+    margin: 16px 10px 0 0;
+}
+.closeBtn {
+    cursor: pointer;
+    background: var(--color);
+    border-radius: 99px;
+    width: 36px;
+    height: 36px;
+    transform: rotate(45deg) scale(0.6);
+    transform-origin: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.closeBtn::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 17px;
+    width: 2px;
+    height: 32px;
+    background: var(--bg);
+}
+.closeBtn::before {
+    top: 16px;
+    left: 2px;
+    content: "";
+    position: absolute;
+    width: 32px;
+    height: 2px;
+    background: var(--bg);
+}
+.loading {
+    position: relative;
+}
+.loading::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 99px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--check-color);
+    border-right: 2px solid var(--check-color);
+    animation: arc 0.5s linear infinite;
+}
+.clickOption {
+    margin-top: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.temperatureBody {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.temperatureTip {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 40px;
+}
+#inputText {
+    font-size: 16px;
+    flex: 1;
+    resize: none;
+    border: 1px solid var(--border-color);
+    padding: 10px 120px 10px 10px;
+    min-height: 6em;
+}
+#send {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+}
+#soundInput {
+    display: none;
+    position: absolute;
+    right: 8px;
+    bottom: 52px;
+}
+#otherSetting {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 1;
+}
+pre {
+    overflow-y: auto;
+    background: var(--bg);
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 12px;
+}
+#camera {
+    position: absolute;
+    bottom: 66px;
+    left: 16px;
+    width: 320px;
+}
+#cameraImage {
+    position: fixed;
+    top: -200%;
+    left: -200%;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(30, 30, 30, 0.2);
+    border-radius: 20px;
+    border: 1px solid transparent;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+@keyframes arc {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@media (max-width: 600px) {
+    body {
+        justify-content: start;
+    }
+    .mainBody {
+        margin-top: 16px;
+        width: 95%;
+        height: 85%;
+        flex-direction: column-reverse;
+        overflow-y: auto;
+    }
+    .vLine {
+        display: none;
+    }
+    #content {
+        height: 300px;
+        flex: auto;
+    }
+    .other {
+        margin-top: 16px;
+        width: 100%;
+    }
+    .modelBody {
+        width: 90vw;
+    }
+    .apiKeyBody,
+    .openApiKeyBody,
+    .hostBody,
+    .openaihostBody {
+        flex-direction: column;
+        justify-content: start;
+        align-items: flex-start;
+        height: 60px;
+        border: none;
+    }
+    #camera {
+        width: 120px;
+    }
+    #soundInput {
+        display: flex;
+    }
+}

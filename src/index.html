@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./atom-one-dark.min.css" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Gemini</title>
+    </head>
+    <body>
+        <div class="mainBody">
+            <div class="settingModel">
+                <div class="modelBody">
+                    <div class="apiKeyBody">
+                        <div>Gemini_api_key</div>
+                        <input type="text" id="apiKey" placeholder="请输入GEMINI_API_KEY" />
+                    </div>
+                    <div class="openApiKeyBody">
+                        <div>Openai_api_key</div>
+                        <input type="text" id="openaiapiKey" placeholder="请输入OPENAI_API_KEY" />
+                    </div>
+                    <div class="hostBody">
+                        <div>Gemini代理地址</div>
+                        <input type="text" id="host" placeholder="请输入代理地址" />
+                    </div>
+                    <div class="openaihostBody">
+                        <div>openai代理地址</div>
+                        <input type="text" id="openaihost" placeholder="请输入代理地址" />
+                    </div>
+                    <div class="safeSettingTitle clickText">安全范围设置-展开</div>
+                    <div class="safeSettingBody">
+                        <div class="safeSetting"></div>
+                    </div>
+                    <div class="closeModel">
+                        <div class="btn clickText">关闭</div>
+                    </div>
+                </div>
+            </div>
+            <div class="other">
+                <div class="modelSelectBody">
+                    <div>模型选择</div>
+                    <select id="chooseModel"></select>
+                </div>
+                <div class="useCamerabody">
+                    <div id="useCamera" class="btn">使用摄像头</div>
+                    <div class="picBody">
+                        <div class="btn" id="choosePic">选择图片</div>
+                    </div>
+                </div>
+                <div class="longChatBody">
+                    <input type="checkbox" id="longChat" />
+                    <div class="clickText">开启连续对话</div>
+                </div>
+                <div class="steamBody">
+                    <input type="checkbox" id="steam" />
+                    <div class="clickText">文字流式处理</div>
+                </div>
+                <div class="temperatureBody">
+                    <div>多样化和创造性</div>
+                    <input type="range" id="temperature" min="0.0" max="1.0" step="0.1" />
+                    <div class="temperatureTip">
+                        <div>更直接</div>
+                        <div>更多样</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vLine"></div>
+            <div class="view">
+                <div id="content"></div>
+                <div class="option">
+                    <div id="preImage"></div>
+                    <div class="clickOption">
+                        <textarea type="text" placeholder="请输入问题(长按空格进行语音输入/Ctrl+Enter快速发送)" id="inputText"></textarea>
+                        <div id="send">发送</div>
+                        <div id="soundInput" class="clickText">开始语音</div>
+                    </div>
+                </div>
+            </div>
+            <div id="otherSetting" class="btn">其他设置</div>
+            <video id="camera" autoplay></video>
+        </div>
+        <div class="showImage"></div>
+        <canvas id="cameraImage"></canvas>
+    </body>
+    <script src="./marked.min.js"></script>
+    <script src="./highlight.min.js"></script>
+    <script src="./main.js?t=3"></script>
+</html>
