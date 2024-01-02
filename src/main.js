@@ -27,6 +27,10 @@ const start = async () => {
         content.innerHTML = "请设置Openai_api_key，否则无法使用语音转文字功能";
         return;
     }
+    if (cameraOpen) {
+        tempImageData = getCameraImage();
+        showPrePic([tempImageData], true);
+    }
     send.innerHTML = "聆听中...";
     let stream = await startInputSound();
     if (stream) {
@@ -221,14 +225,14 @@ function checkResOk(res, done) {
         return;
     }
     if (res.promptFeedback.blockReason) {
-        if (modelIndex == 0 && longChat) {
+        if (modelIndex == 0 && longChat && ChatList[ChatList.length - 1].role != "model") {
             ChatList.push({ parts: [{ text: "" }], role: "model" });
         }
         content.innerHTML = "受到安全限制，无法回复";
         return;
     }
     if (res.candidates[0].finishReason != "STOP") {
-        if (modelIndex == 0 && longChat) {
+        if (modelIndex == 0 && longChat && ChatList[ChatList.length - 1].role != "model") {
             ChatList.push({ parts: [{ text: "" }], role: "model" });
         }
         resText = "受到安全限制，无法回复:" + res.candidates[0].finishReason;
@@ -352,6 +356,7 @@ let safeSettingShowStatus = localStorage.getItem("safeSettingShowStatus") == "tr
 let cameraOpen = false;
 let startSoundInput = false;
 let inputTextFocus = false;
+let tempImageData = null;
 
 const choosePic = document.querySelector("#choosePic");
 const inputText = document.querySelector("#inputText");
@@ -398,6 +403,9 @@ if (modelIndex == 0) {
     picBody.style.display = "none";
     useCamerabody.style.display = "none";
     longChatInput.disabled = false;
+    cameraOpen = false;
+    const video = document.querySelector("#camera");
+    video.srcObject = null;
 } else {
     picBody.style.display = "flex";
     useCamerabody.style.display = "flex";
@@ -555,6 +563,9 @@ chooseModel.onchange = () => {
         useCamerabody.style.display = "none";
         picBody.style.display = "none";
         longChatInput.disabled = false;
+        cameraOpen = false;
+        const video = document.querySelector("#camera");
+        video.srcObject = null;
     } else {
         useCamerabody.style.display = "flex";
         picBody.style.display = "flex";
@@ -617,14 +628,15 @@ send.onclick = async () => {
     if (modelIndex == 1) {
         const parts = [{ text }];
         if (cameraOpen) {
-            const imageBaseData = getCameraImage();
-            showPrePic([imageBaseData], true);
+            const imageBaseData = tempImageData || getCameraImage();
+            !tempImageData && showPrePic([imageBaseData], true);
             parts.push({
                 inlineData: {
                     data: imageBaseData.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
                     mimeType: "image/png",
                 },
             });
+            tempImageData = null;
         } else if (files.length) {
             for (let i = 0; i < files.length; i++) {
                 const item = files[i];
